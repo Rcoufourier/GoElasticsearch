@@ -15,3 +15,11 @@ _Camille ARSAC, James BISSICK, Rémi COUFOURIER_
 | Golang     | Back-end language          |
 | ElasticSearch | Non-relational database |
 | Docker   | Virtual Container            |
+
+
+## Etudiant participant
+- Camille Arsac
+
+- Remi Coufourier
+
+- James Bissick
