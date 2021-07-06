@@ -10,7 +10,6 @@
 
 | Service    | Type                       |
 | ---------- | -------------------------- |
-| Reactjs    | Front-end framework        |
 | Golang     | Back-end language          |
 | ElasticSearch | Non-relational database |
 | Docker   | Virtual Container            |
