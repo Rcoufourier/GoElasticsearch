@@ -6,7 +6,7 @@ _Camille ARSAC, James BISSICK, Rémi COUFOURIER_
 
 ### 1 - Goal
 
-GoElasticsearch is a school project made for @HETIC, with the aim to create a library of books and searching feature using the Amazon Web Services API and Elastic Search.
+*GoElasticsearch is a school project made for @HETIC, with the aim to create a library of books and searching feature using the Amazon Web Services API and Elastic Search.*
 
 ### 2 - Stack
 
