@@ -18,9 +18,10 @@
 
 WIP
 
-## Etudiant participant
+## Team
 - Camille Arsac
 
 - James Bissick
 
 - Remi Coufourier
+
