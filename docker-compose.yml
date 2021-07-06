@@ -11,11 +11,8 @@ services:
       - elasticsearch
     volumes:
       - ./api:/go/src/github.com/GoElasticsearch/api
-<<<<<<< HEAD
-=======
     networks:
       - main
->>>>>>> 0b14e884ec56280e571a97b98e319a1e75012571
   elasticsearch:
     build: ./docker/elasticsearch
     container_name: 'elasticsearch'
@@ -33,14 +30,8 @@ services:
     volumes:
       - ./srv/elas1:/usr/share/elasticsearch/data
     networks:
-<<<<<<< HEAD
-      - esnet
-
-networks:
-  esnet:
-    driver: bridge
-=======
       - main
+
   kibana:
     image: kibana:7.13.2
     container_name: 'kibana'
@@ -57,4 +48,3 @@ networks:
 
 networks:
   main:
->>>>>>> 0b14e884ec56280e571a97b98e319a1e75012571
