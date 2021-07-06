@@ -14,6 +14,9 @@
 | ElasticSearch | Non-relational database |
 | Docker   | Virtual Container            |
 
+## II - Running the Project
+
+WIP
 
 ## Etudiant participant
 - Camille Arsac
