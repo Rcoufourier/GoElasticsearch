@@ -18,6 +18,6 @@
 ## Etudiant participant
 - Camille Arsac
 
-- Remi Coufourier
-
 - James Bissick
+
+- Remi Coufourier
