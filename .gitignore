@@ -3,3 +3,4 @@
 /.idea
 
 /api/tmp
+.DS_Store
