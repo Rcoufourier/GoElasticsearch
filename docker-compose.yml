@@ -11,6 +11,8 @@ services:
       - elasticsearch
     volumes:
       - ./api:/go/src/github.com/GoElasticsearch/api
+    networks:
+      - main
   elasticsearch:
     build: ./docker/elasticsearch
     container_name: 'elasticsearch'
@@ -28,8 +30,20 @@ services:
     volumes:
       - ./srv/elas1:/usr/share/elasticsearch/data
     networks:
-      - esnet
+      - main
+  kibana:
+    image: kibana:7.13.2
+    container_name: 'kibana'
+    volumes:
+      - ./config/kibana/kibana.yml:/usr/share/kibana/kibana.yml
+    ports:
+      - "5601:5601"
+    environment:
+      - "ELASTICSEARCH_PASSWORD=${ES_PASSWORD}"
+    links:
+      - elasticsearch
+    networks:
+      - main
 
 networks:
-  esnet:
-    driver: bridge
+  main:
