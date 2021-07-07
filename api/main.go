@@ -1,16 +1,26 @@
 package main
 
 import (
-	"fmt"
+	"github.com/GoElasticsearch/api/controllers"
+	"github.com/gorilla/mux"
 	"log"
 	"net/http"
-)
-
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
-}
+	)
 
 func main() {
-	http.HandleFunc("/", handler)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	router := initRouter()
+	if err != nil {
+		log.Fatal("es client Failed", err)
+	}
+	log.Println(esClient)
+	log.Println("Running on localhost:8080")
+	log.Fatal(http.ListenAndServe(":8080", router))
 }
+
+func initRouter () *mux.Router{
+	r := mux.NewRouter()
+	r.HandleFunc("/search", controllers.Search).Methods("POST")
+	return r
+}
+
+
