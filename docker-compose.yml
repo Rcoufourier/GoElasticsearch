@@ -11,7 +11,7 @@ services:
     links:
       - elasticsearch
     volumes:
-      - ./api:/go
+      - ./api:/go/src/github.com/GoElasticsearch/api
     networks:
       - main
   elasticsearch:
