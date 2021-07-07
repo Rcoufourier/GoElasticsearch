@@ -4,25 +4,16 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"fmt"
 	"github.com/GoElasticsearch/api/utils"
-	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 )
 
 func Search(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-type", "application/json;charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
-
-	fmt.Printf("request : %v\n", r)
-
-	keyword := mux.Vars(r)["Keyword"]
-
-	fmt.Printf("keyword : %v\n", keyword)
+	keyword := r.URL.Query().Get("keyword")
 
 	esClient, err := utils.GetESClient()
-	if err != nil{
+	if err != nil {
 		log.Fatal("not able to get ES client")
 	}
 
@@ -32,7 +23,7 @@ func Search(w http.ResponseWriter, r *http.Request) {
 	query := map[string]interface{}{
 		"query": map[string]interface{}{
 			"query_string": map[string]interface{}{
-				"query": "*doe*",
+				"query": keyword,
 			},
 		},
 	}
@@ -71,9 +62,11 @@ func Search(w http.ResponseWriter, r *http.Request) {
 	var books map[string]interface{}
 
 	res, _ := esClient.Search(esClient.Search.WithTrackTotalHits(true))
-	if err := json.NewDecoder(res.Body).Decode(&books); err != nil{
+	if err := json.NewDecoder(res.Body).Decode(&books); err != nil {
 		log.Fatalf("Error parsing the response body: %s", err)
 	}
 
-	fmt.Println(response)
+	w.Header().Set("content-type", "application/json;charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(response.String()))
 }
