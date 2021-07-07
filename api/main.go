@@ -9,10 +9,6 @@ import (
 
 func main() {
 	router := initRouter()
-	if err != nil {
-		log.Fatal("es client Failed", err)
-	}
-	log.Println(esClient)
 	log.Println("Running on localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
