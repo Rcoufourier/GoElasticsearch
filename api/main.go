@@ -20,5 +20,6 @@ func initRouter() *mux.Router {
 	r.HandleFunc("/add-book", controllers.AddBook).Methods("POST")
 	r.HandleFunc("/delete/{id}", controllers.Delete).Methods("DELETE")
 	r.HandleFunc("/edit/{id}", controllers.Edit).Methods("PUT")
+	r.HandleFunc("/add-from-api", controllers.AddDataAPI).Methods("GET")
 	return r
 }
