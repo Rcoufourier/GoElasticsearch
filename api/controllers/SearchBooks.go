@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"github.com/GoElasticsearch/api/utils"
 	"log"
 	"net/http"
@@ -16,6 +17,10 @@ func Search(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal("not able to get ES client")
 	}
+
+	//http://localhost:8080/search?keyword="doe"
+	//fmt.Printf("request : %v\n", r)
+	fmt.Printf("keyword : %v\n", keyword)
 
 	var buf bytes.Buffer
 
