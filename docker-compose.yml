@@ -5,8 +5,9 @@ services:
     build:
       context: ./docker/goland
     container_name: 'goland'
+    restart: always
     ports:
-      - "3333:3333"
+      - "8080:8080"
     links:
       - elasticsearch
     volumes:
@@ -28,10 +29,9 @@ services:
     ports:
       - "9200:9200"
     volumes:
-      - ./srv/elas1:/usr/share/elasticsearch/data
+      - ./data/elasticsearch:/usr/share/elasticsearch/data
     networks:
       - main
-
   kibana:
     image: kibana:7.13.2
     container_name: 'kibana'
@@ -39,8 +39,6 @@ services:
       - ./config/kibana/kibana.yml:/usr/share/kibana/kibana.yml
     ports:
       - "5601:5601"
-    environment:
-      - "ELASTICSEARCH_PASSWORD=${ES_PASSWORD}"
     links:
       - elasticsearch
     networks:
