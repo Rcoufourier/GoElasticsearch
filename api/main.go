@@ -16,5 +16,6 @@ func main() {
 func initRouter() *mux.Router {
 	r := mux.NewRouter()
 	r.HandleFunc("/search", controllers.Search).Methods("GET")
+	r.HandleFunc("/add", controllers.AddBooks).Methods("GET")
 	return r
 }
