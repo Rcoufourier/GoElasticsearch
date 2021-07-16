@@ -35,6 +35,7 @@ func AddOneBook(w http.ResponseWriter, r *http.Request) {
 		Index: "books",
 		Body:  strings.NewReader(b.String()),
 	}
+
 	do, err := req.Do(context.Background(), esClient)
 	if err != nil {
 		log.Fatal(err)
@@ -42,5 +43,5 @@ func AddOneBook(w http.ResponseWriter, r *http.Request) {
 	defer do.Body.Close()
 
 	w.Header().Set("content-type", "application/json;charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
+	w.WriteHeader(http.StatusNoContent)
 }
