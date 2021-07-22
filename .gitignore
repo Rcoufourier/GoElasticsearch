@@ -1,5 +1,4 @@
-/srv
+/data/*
 
 /.idea
-
-/api/tmp
+.DS_Store
