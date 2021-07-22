@@ -16,7 +16,8 @@ func main() {
 func initRouter() *mux.Router {
 	r := mux.NewRouter()
 	r.HandleFunc("/search", controllers.Search).Methods("GET")
-	r.HandleFunc("/add-one-book", controllers.AddOneBook).Methods("POST")
+	r.HandleFunc("/add-books", controllers.AddBooks).Methods("GET")
+	r.HandleFunc("/add-book", controllers.AddBook).Methods("POST")
 	r.HandleFunc("/delete/{id}", controllers.Delete).Methods("DELETE")
 	r.HandleFunc("/edit/{id}", controllers.Edit).Methods("PUT")
 	return r
