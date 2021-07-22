@@ -48,7 +48,7 @@ func AddDataAPI(w http.ResponseWriter, r *http.Request) {
 	//req := "https://www.googleapis.com/books/v1/volumes?maxResults=40" + keyword + apiKey
 	// https://www.googleapis.com/books/v1/volumes?q=test&maxResults=40&key=AIzaSyCT_Pt_MCIoLBd4BHVWfA1lyd7R1YOWnPw
 
-	res, err := http.Get("https://www.googleapis.com/books/v1/volumes?q=test&maxResults=5&key=AIzaSyCT_Pt_MCIoLBd4BHVWfA1lyd7R1YOWnPw")
+	res, err := http.Get("https://www.googleapis.com/books/v1/volumes?q=test&maxResults=2&key=AIzaSyCT_Pt_MCIoLBd4BHVWfA1lyd7R1YOWnPw")
 	if err != nil {
 		fmt.Println("Cannot get request!")
 	}
@@ -72,16 +72,14 @@ func AddDataAPI(w http.ResponseWriter, r *http.Request) {
 	var dataTab []APIBooks
 
 	for _, data := range resData.Items {
-		//fmt.Println("------------------------------------")
 		var finalData APIBooks
 		errormessage = njson.Unmarshal([]byte(string(data)), &finalData)
 		if errormessage != nil {
 			fmt.Println(errormessage)
 		}
 		dataTab = append(dataTab, finalData)
+
 	}
 
-	fmt.Println(dataTab[2].Author)
-	fmt.Println("------------------------------------")
-
+	AddBulkBooks(dataTab)
 }
