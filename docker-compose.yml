@@ -1,10 +1,10 @@
 version: "3.7"
 
 services:
-  goland:
+  golang:
     build:
-      context: ./docker/goland
-    container_name: 'goland'
+      context: ./docker/golang
+    container_name: 'golang'
     restart: always
     ports:
       - "8080:8080"
