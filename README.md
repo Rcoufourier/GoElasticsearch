@@ -1,5 +1,6 @@
 # GoElasticsearch
 
+
 ## I - Intro
 
 ### 1 - Goal
@@ -18,10 +19,10 @@
 
 WIP
 
+## Etudiant participant
 ## Team
 - Camille Arsac
 
 - James Bissick
 
 - Remi Coufourier
-

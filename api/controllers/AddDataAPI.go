@@ -84,5 +84,4 @@ func AddDataAPI(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(dataTab[2].Author)
 	fmt.Println("------------------------------------")
 
-
 }
