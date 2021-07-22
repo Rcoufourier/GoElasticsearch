@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"github.com/GoElasticsearch/api/models"
@@ -47,7 +48,7 @@ func AddBook(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent)
 }
 
-func AddBooks(w http.ResponseWriter, r *http.Request) {
+func AddBulkBooks(dataTab []APIBooks) {
 	log.Println("Add in elasticsearch")
 	esClient, err := utils.GetESClient()
 	if err != nil {
@@ -60,24 +61,41 @@ func AddBooks(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatalf("Error bulk indexer: %v", err)
 	}
-	err = indexer.Add(
-		context.Background(),
-		esutil.BulkIndexerItem{
-			Action: "index",
-			Body:   strings.NewReader(`{ "title":"Michel doe","author":"JeanBonneau", "abstract":"Lorem2 blablou doe ipsum dolor sit amet, consectetur adipiscing elit." }`),
-			OnSuccess: func(ctx context.Context, item esutil.BulkIndexerItem, res esutil.BulkIndexerResponseItem) {
-				log.Printf("item: %s", item)
-			},
-			OnFailure: func(ctx context.Context, item esutil.BulkIndexerItem, res esutil.BulkIndexerResponseItem, err error) {
-				if err != nil {
-					log.Printf("ERROR: %s", err)
-				} else {
-					log.Printf("ERROR: %s: %s", res.Error.Type, res.Error.Reason)
-				}
-			},
-		})
-	if err != nil {
-		log.Fatalf("Error bulk add: %v", err)
+
+	var b bytes.Buffer
+	for _, data := range dataTab {
+		// Add data
+		b.WriteString(`{"title" : "`)
+		b.WriteString(data.Title)
+		b.WriteString(`",`)
+		b.WriteString(`"author" : "`)
+		b.WriteString(data.Author)
+		b.WriteString(`",`)
+		b.WriteString(`"abstract" : "`)
+		b.WriteString(data.Abstract)
+		b.WriteString(`"}`)
+		frosties, err := json.Marshal(data)
+
+		err = indexer.Add(
+			context.Background(),
+			esutil.BulkIndexerItem{
+				Action: "index",
+				Body:   bytes.NewReader(frosties),
+				OnSuccess: func(ctx context.Context, item esutil.BulkIndexerItem, res esutil.BulkIndexerResponseItem) {
+					log.Printf("item: %s", item)
+				},
+				OnFailure: func(ctx context.Context, item esutil.BulkIndexerItem, res esutil.BulkIndexerResponseItem, err error) {
+					if err != nil {
+						log.Printf("ERROR: %s", err)
+					} else {
+						log.Printf("ERROR: %s: %s", res.Error.Type, res.Error.Reason)
+					}
+				},
+			})
+		if err != nil {
+			log.Fatalf("Error bulk add: %v", err)
+		}
+
 	}
 	indexer.Close(context.Background())
 }
